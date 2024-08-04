@@ -1,4 +1,4 @@
-use rand::thread_rng;
+use rand::{random, seq::SliceRandom, thread_rng};
 #[derive(Debug)]
 struct Deck {
     cards: Vec<String>,
@@ -23,15 +23,21 @@ impl Deck {
         Deck { cards }
     }
 
-    fn shuffle(&self) {
-        let rng = thread_rng();
+    fn shuffle(&mut self) {
+        // Need to make rng as mutable because the value will change over time as new random numbers are generated
+        let mut rng = thread_rng();
+        self.cards.shuffle(&mut rng);
     }
+
+    fn deal(&mut self, num_cards: usize) {}
 }
 
 fn main() {
     // :? = debug formatter
     // Formatters are often used in Rust for example when displaying decimals
-    let deck = Deck::new();
+    let mut deck = Deck::new();
+
+    deck.shuffle();
 
     println!("Here's your deck: {:#?}", deck)
 }
