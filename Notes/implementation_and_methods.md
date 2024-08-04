@@ -39,3 +39,16 @@ Deck
 ```
 
 - Either is equivalent
+
+### Deal Method
+
+- Takes in a mutable reference to self and a usize representing the number of cards you'd like to deal
+- Will need to look into the standard library docs '[https://doc.rust-lang.org/stable/std/]'
+- We'll use the split_off vector method '[https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.split_off]'
+- Implementation:
+
+```rust
+fn deal(&mut self, num_cards: usize) -> Vec<String> {
+        self.cards.split_off(self.cards.len() - num_cards)
+    }
+```
